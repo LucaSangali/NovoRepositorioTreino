@@ -22,20 +22,7 @@ Route::get('/', function () {
 
 Route::get('/', [PostController::class, 'index']);
 
-Route::get('/auth', function() {
-
-    if(Auth::attempt(['email'=>'fahey.dahlia@example.net', 'password'=>$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi])) {
-        return "Oi";
-    }
-
-    return "Falhou";
-});
-
-Route::get('/auth/logout', function(){
-    Auth::logout();
-});
-
-Route::group(['prefix'=>'admin', 'middleware'=>'auth'], function() {
+Route::group(['prefix'=>'admin'], function() {
     Route::get('', [PostAdminController::class, 'index'])->name('admin.index');
     Route::get('create', [PostAdminController::class, 'create'])->name('admin.create');
     Route::post('store', [PostAdminController::class, 'store'])->name('admin.store');
